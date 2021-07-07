@@ -38,7 +38,11 @@ const TabMenu = () => {
         <TabPane tab="Tab 1" key="1">
           <div className="site-card-wrapper">
             <Row justify="center" gutter={[16, 16]} className="card-wrap-row">
-              <ToDoItem deleteConfirm={deleteConfirm} deleteCancel={deleteCancel} showEditModal={showEditModal} />
+              <ToDoItem
+                deleteConfirm={deleteConfirm}
+                deleteCancel={deleteCancel}
+                showEditModal={showEditModal}
+              />
             </Row>
           </div>
         </TabPane>
