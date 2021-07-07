@@ -52,12 +52,12 @@ const EditToDoModal = ({ isModalVisible, handleEditOk, handleEditCancel }) => {
             />
           </Form.Item>
           <Row justify="end" gutter={[16, 16]}>
-            <Col className="gutter-row" xs={24} md={12} lg={8}>
+            <Col xs={24} md={12} lg={8}>
               <Button block onClick={handleEditCancel}>
                 Cancel
               </Button>
             </Col>
-            <Col className="gutter-row" xs={24} md={12} lg={8}>
+            <Col xs={24} md={12} lg={8}>
               <Form.Item>
                 <Button block type="primary" htmlType="submit">
                   Confirm
