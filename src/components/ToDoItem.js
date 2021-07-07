@@ -1,7 +1,7 @@
-import { Col, Card, Switch } from "antd";
+import { Col, Card, Switch, Popconfirm } from "antd";
 import { EditOutlined, DeleteOutlined, CloseOutlined, CheckOutlined } from "@ant-design/icons";
 
-const ToDoItem = () => {
+const ToDoItem = ({ deleteConfirm, deleteCancel }) => {
   return (
     <>
       <Col xs={24} md={12} lg={8}>
@@ -15,7 +15,15 @@ const ToDoItem = () => {
               unCheckedChildren={<CloseOutlined />}
               defaultChecked
             />,
-            <DeleteOutlined key="delete" />,
+            <Popconfirm
+              title="Are you sure to delete this ToDo?"
+              onConfirm={deleteConfirm}
+              onCancel={deleteCancel}
+              okText="Confirm"
+              cancelText="Cancel"
+            >
+              <DeleteOutlined key="delete" />
+            </Popconfirm>,
           ]}
         >
           Card Content

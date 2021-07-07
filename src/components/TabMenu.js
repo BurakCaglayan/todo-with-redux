@@ -1,16 +1,26 @@
-import { Tabs, Row } from "antd";
+import { Tabs, Row, message } from "antd";
 
 import ToDoItem from "./ToDoItem";
 
 const { TabPane } = Tabs;
 
 const TabMenu = () => {
+  function deleteConfirm(e) {
+    console.log(e);
+    message.success("Click on Yes");
+  }
+
+  function deleteCancel(e) {
+    console.log(e);
+    message.error("Click on No");
+  }
+
   return (
     <Tabs defaultActiveKey="1" centered>
       <TabPane tab="Tab 1" key="1">
         <div className="site-card-wrapper">
           <Row justify="center" gutter={[16, 16]} className="card-wrap-row">
-            <ToDoItem />
+            <ToDoItem deleteConfirm={deleteConfirm} deleteCancel={deleteCancel} />
           </Row>
         </div>
       </TabPane>
