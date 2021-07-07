@@ -1,7 +1,7 @@
 import { Col, Card, Switch, Popconfirm } from "antd";
 import { EditOutlined, DeleteOutlined, CloseOutlined, CheckOutlined } from "@ant-design/icons";
 
-const ToDoItem = ({ deleteConfirm, deleteCancel }) => {
+const ToDoItem = ({ deleteConfirm, deleteCancel, showEditModal }) => {
   return (
     <>
       <Col xs={24} md={12} lg={8}>
@@ -9,7 +9,7 @@ const ToDoItem = ({ deleteConfirm, deleteCancel }) => {
           hoverable
           title="Card Title"
           actions={[
-            <EditOutlined key="edit" />,
+            <EditOutlined key="edit" onClick={showEditModal} />,
             <Switch
               checkedChildren={<CheckOutlined />}
               unCheckedChildren={<CloseOutlined />}
