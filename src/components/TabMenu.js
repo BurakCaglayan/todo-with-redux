@@ -5,9 +5,24 @@ import { Tabs, Row, message } from "antd";
 import ToDoItem from "./ToDoItem";
 import EditToDoModal from "./EditToDoModal";
 import { useSelector, useDispatch } from "react-redux";
-import { list, remove } from "../redux/actions/todo";
+import { changeFilter, list, remove } from "../redux/actions/todo";
 
 const { TabPane } = Tabs;
+
+const statuses = [
+  {
+    label: "All",
+    status: "ALL",
+  },
+  {
+    label: "Completed",
+    status: "COMPLETED",
+  },
+  {
+    label: "Incompleted",
+    status: "INCOMPLETED",
+  },
+];
 
 const TabMenu = () => {
   const { todos, pending } = useSelector((state) => state.todo);
@@ -43,7 +58,11 @@ const TabMenu = () => {
     setIsModalVisible(false);
   };
 
-  const RenderTodos = () => {
+  function tabChange(key) {
+    dispatch(changeFilter(key));
+  }
+
+  const renderTodos = () => {
     return todos.map((todo) => {
       return (
         <ToDoItem
@@ -57,22 +76,24 @@ const TabMenu = () => {
     });
   };
 
-  return (
-    <>
-      <Tabs defaultActiveKey="1" centered>
-        <TabPane tab="All" key="1">
+  const renderTabs = () => {
+    return statuses.map((status) => {
+      return (
+        <TabPane tab={status.label} key={status.status}>
           <div className="site-card-wrapper">
             <Row justify="center" gutter={[16, 16]} className="card-wrap-row">
-              {RenderTodos()}
+              {renderTodos()}
             </Row>
           </div>
         </TabPane>
-        <TabPane tab="Completed" key="2">
-          Completed Items
-        </TabPane>
-        <TabPane tab="Incompleted" key="3">
-          Incompleted Items
-        </TabPane>
+      );
+    });
+  };
+
+  return (
+    <>
+      <Tabs defaultActiveKey="1" centered onChange={tabChange}>
+        {renderTabs()}
       </Tabs>
       <EditToDoModal
         selectedTodo={selectedTodo}
