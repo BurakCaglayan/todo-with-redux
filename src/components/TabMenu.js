@@ -1,17 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Tabs, Row, message } from "antd";
 
 import ToDoItem from "./ToDoItem";
 import EditToDoModal from "./EditToDoModal";
+import { useSelector, useDispatch } from "react-redux";
+import { list, remove } from "../redux/actions/todo";
 
 const { TabPane } = Tabs;
 
 const TabMenu = () => {
+  const { todos, pending } = useSelector((state) => state.todo);
+  const dispatch = useDispatch();
+
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const deleteConfirm = (e) => {
-    console.log(e);
+  useEffect(() => {
+    dispatch(list());
+  }, []);
+
+  const deleteConfirm = (id) => {
+    dispatch(remove(id));
     message.success("Click on Yes");
   };
 
