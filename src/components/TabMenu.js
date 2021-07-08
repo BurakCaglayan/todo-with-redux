@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Tabs, Row, message } from "antd";
+import { Tabs, Row, Spin, message } from "antd";
 
 import ToDoItem from "./ToDoItem";
 import EditToDoModal from "./EditToDoModal";
@@ -62,30 +62,36 @@ const TabMenu = () => {
     dispatch(changeFilter(key));
   }
 
-  const renderTodos = () => {
-    return todos.map((todo) => {
-      return (
-        <ToDoItem
-          key={todo._id}
-          todo={todo}
-          pending={pending}
-          deleteConfirm={deleteConfirm}
-          deleteCancel={deleteCancel}
-          showEditModal={showEditModal}
-        />
-      );
-    });
+  const renderTodos = (status) => {
+    if (todos.length > 0) {
+      return todos.map((todo) => {
+        return (
+          <ToDoItem
+            key={todo._id}
+            todo={todo}
+            pending={pending}
+            deleteConfirm={deleteConfirm}
+            deleteCancel={deleteCancel}
+            showEditModal={showEditModal}
+          />
+        );
+      });
+    } else {
+      return <h1>No Todo in {status.label}</h1>;
+    }
   };
 
   const renderTabs = () => {
     return statuses.map((status) => {
       return (
         <TabPane tab={status.label} key={status.status}>
-          <div className="site-card-wrapper">
-            <Row justify="center" gutter={[16, 16]} className="card-wrap-row">
-              {renderTodos()}
-            </Row>
-          </div>
+          <Spin spinning={pending}>
+            <div className="site-card-wrapper">
+              <Row justify="center" gutter={[16, 16]} className="card-wrap-row">
+                {renderTodos(status)}
+              </Row>
+            </div>
+          </Spin>
         </TabPane>
       );
     });
