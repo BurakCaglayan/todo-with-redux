@@ -3,11 +3,17 @@ import React from "react";
 import { Form, Input, Button, Switch, Row, Col } from "antd";
 import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 
+import { useDispatch } from "react-redux";
+import { create } from "../redux/actions/todo";
+
 const AddToDoItem = () => {
+  const dispatch = useDispatch();
+
   const { TextArea } = Input;
 
   const onAddFinish = (values) => {
-    console.log("Success:", values);
+    values.status = values.status === true ? "COMPLETED" : "INCOMPLETED";
+    dispatch(create(values));
   };
 
   const onAddFinishFailed = (errorInfo) => {
@@ -22,18 +28,15 @@ const AddToDoItem = () => {
       onFinishFailed={onAddFinishFailed}
     >
       <div className="site-card-wrapper">
-        <Row justify="center" align="middle" layout="inline"gutter={16} className="card-wrap-row" >
+        <Row justify="center" align="middle" layout="inline" gutter={16} className="card-wrap-row">
           <Col xs={24} md={12} lg={6}>
-            <Form.Item
-              name="title"
-              rules={[{ required: true, message: "Please input your title!" }]}
-            >
+            <Form.Item name="title" rules={[{ required: true, message: "Please input your title!" }]}>
               <Input placeholder="Title" />
             </Form.Item>
           </Col>
           <Col xs={24} md={12} lg={112}>
             <Form.Item name="description" rules={[{ required: false }]}>
-              <TextArea  placeholder="Description" autoSize={{ minRows: 1, maxRows: 3 }} />
+              <TextArea placeholder="Description" autoSize={{ minRows: 1, maxRows: 3 }} />
             </Form.Item>
           </Col>
           <Col className="txt-center" xs={24} md={12} lg={2}>
