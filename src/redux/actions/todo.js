@@ -1,9 +1,11 @@
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+
 export const list = () => (dispatch) => {
   dispatch({
     type: "todo/pending",
   });
 
-  fetch("http://localhost:5000/api/todos/list")
+  fetch(`${BASE_URL}/api/todos/list`)
     .then((res) => res.json())
     .then((todos) =>
       dispatch({
@@ -18,7 +20,7 @@ export const create = (data) => (dispatch) => {
     type: "todo/pending",
   });
 
-  fetch("http://localhost:5000/api/todos", {
+  fetch(`${BASE_URL}/api/todos`, {
     headers: {
       "Content-Type": "application/json",
     },
@@ -32,7 +34,7 @@ export const remove = (id) => (dispatch) => {
     type: "todo/pending",
   });
 
-  fetch(`http://localhost:5000/api/todos/${id}`, {
+  fetch(`${BASE_URL}/api/todos/${id}`, {
     method: "DELETE",
   }).then(() => dispatch(list()));
 };
@@ -42,7 +44,7 @@ export const update = (id, data) => (dispatch) => {
     type: "todo/pending",
   });
 
-  fetch(`http://localhost:5000/api/todos/${id}`, {
+  fetch(`${BASE_URL}/api/todos/${id}`, {
     headers: {
       "Content-Type": "application/json",
     },
