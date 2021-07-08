@@ -12,7 +12,7 @@ function App() {
   return (
     <>
       <Title className="todo-title" type="secondary">
-        Getir ToDo
+        ToDo With Redux
       </Title>
       <AddToDoItem />
       <TabMenu />
