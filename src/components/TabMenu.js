@@ -68,6 +68,7 @@ const TabMenu = () => {
         <ToDoItem
           key={todo._id}
           todo={todo}
+          pending={pending}
           deleteConfirm={deleteConfirm}
           deleteCancel={deleteCancel}
           showEditModal={showEditModal}

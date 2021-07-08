@@ -9,7 +9,7 @@ import { update } from "../redux/actions/todo";
 const isCompleted = (status) => (status === "COMPLETED" ? true : false);
 const statusCheck = (status) => (status === true ? "COMPLETED" : "INCOMPLETED");
 
-const ToDoItem = ({ todo, deleteConfirm, deleteCancel, showEditModal }) => {
+const ToDoItem = ({ todo, deleteConfirm, deleteCancel, showEditModal, pending }) => {
   const dispatch = useDispatch();
 
   const [isChecked, setIsChecked] = useState(false);
@@ -28,6 +28,7 @@ const ToDoItem = ({ todo, deleteConfirm, deleteCancel, showEditModal }) => {
       <Col xs={24} md={12} lg={8}>
         <Card
           hoverable
+          loading={pending}
           title={todo.title}
           actions={[
             <EditOutlined key="edit" onClick={() => showEditModal(todo)} />,
