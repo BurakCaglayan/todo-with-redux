@@ -9,11 +9,13 @@ import { create } from "../redux/actions/todo";
 const AddToDoItem = () => {
   const dispatch = useDispatch();
 
+  const [addForm] = Form.useForm();
   const { TextArea } = Input;
 
   const onAddFinish = (values) => {
     values.status = values.status === true ? "COMPLETED" : "INCOMPLETED";
     dispatch(create(values));
+    addForm.resetFields();
   };
 
   const onAddFinishFailed = (errorInfo) => {
@@ -23,6 +25,7 @@ const AddToDoItem = () => {
   return (
     <Form
       name="editForm"
+      form={addForm}
       initialValues={{ title: "", description: "", status: false }}
       onFinish={onAddFinish}
       onFinishFailed={onAddFinishFailed}
