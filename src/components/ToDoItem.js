@@ -28,7 +28,8 @@ const ToDoItem = ({ todo, deleteConfirm, deleteCancel, showEditModal, pending })
       <Col xs={24} md={12} lg={8}>
         <Card
           hoverable
-          loading={pending}
+          bordered={false}
+          className={isChecked ? "completed-card" : ""}
           title={todo.title}
           actions={[
             <EditOutlined key="edit" onClick={() => showEditModal(todo)} />,
