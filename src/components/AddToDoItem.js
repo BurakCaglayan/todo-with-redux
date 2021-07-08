@@ -41,11 +41,7 @@ const AddToDoItem = () => {
           </Col>
           <Col className="txt-center" xs={24} md={12} lg={2}>
             <Form.Item name="status" valuePropName="checked">
-              <Switch
-                checkedChildren={<CheckOutlined />}
-                unCheckedChildren={<CloseOutlined />}
-                defaultChecked
-              />
+              <Switch checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />
             </Form.Item>
           </Col>
           <Col xs={24} md={12} lg={4}>

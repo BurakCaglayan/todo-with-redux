@@ -3,7 +3,9 @@ import React from "react";
 import { Modal, Form, Input, Button, Switch, Row, Col } from "antd";
 import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 
-const EditToDoModal = ({ isModalVisible, handleEditOk, handleEditCancel }) => {
+const isCompleted = (status) => (status === "COMPLETED" ? true : false);
+
+const EditToDoModal = ({ selectedTodo, isModalVisible, handleEditOk, handleEditCancel }) => {
   const { TextArea } = Input;
 
   const onEditFinish = (values) => {
@@ -28,7 +30,11 @@ const EditToDoModal = ({ isModalVisible, handleEditOk, handleEditCancel }) => {
           name="editForm"
           labelCol={{ span: 24 }}
           wrapperCol={{ span: 24 }}
-          initialValues={{ title: "", description: "", status: false }}
+          initialValues={{
+            title: selectedTodo.title,
+            description: selectedTodo.description,
+            status: isCompleted(selectedTodo.status),
+          }}
           onFinish={onEditFinish}
           onFinishFailed={onEditFinishFailed}
         >
@@ -45,11 +51,7 @@ const EditToDoModal = ({ isModalVisible, handleEditOk, handleEditCancel }) => {
           </Form.Item>
 
           <Form.Item name="status" valuePropName="checked" wrapperCol={{ offset: 11, span: 24 }}>
-            <Switch
-              checkedChildren={<CheckOutlined />}
-              unCheckedChildren={<CloseOutlined />}
-              defaultChecked
-            />
+            <Switch checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />
           </Form.Item>
           <Row justify="end" gutter={[16, 16]}>
             <Col xs={24} md={12} lg={8}>

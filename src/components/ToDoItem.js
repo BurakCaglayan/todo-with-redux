@@ -11,11 +11,11 @@ const ToDoItem = ({ todo, deleteConfirm, deleteCancel, showEditModal }) => {
           hoverable
           title={todo.title}
           actions={[
-            <EditOutlined key="edit" onClick={showEditModal} />,
+            <EditOutlined key="edit" onClick={() => showEditModal(todo)} />,
             <Switch
               checkedChildren={<CheckOutlined />}
               unCheckedChildren={<CloseOutlined />}
-              checked={isCompleted(todo.status)}
+              defaultChecked={isCompleted(todo.status)}
             />,
             <Popconfirm
               title="Are you sure to delete this ToDo?"

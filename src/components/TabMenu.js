@@ -14,6 +14,7 @@ const TabMenu = () => {
   const dispatch = useDispatch();
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedTodo, setSelectedTodo] = useState({});
 
   useEffect(() => {
     dispatch(list());
@@ -29,7 +30,8 @@ const TabMenu = () => {
     message.error("Click on No");
   };
 
-  const showEditModal = () => {
+  const showEditModal = (item) => {
+    setSelectedTodo(item);
     setIsModalVisible(true);
   };
 
@@ -73,6 +75,7 @@ const TabMenu = () => {
         </TabPane>
       </Tabs>
       <EditToDoModal
+        selectedTodo={selectedTodo}
         isModalVisible={isModalVisible}
         showEditModal={showEditModal}
         handleEditOk={handleEditOk}
