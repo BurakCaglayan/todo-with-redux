@@ -41,17 +41,27 @@ const TabMenu = () => {
     setIsModalVisible(false);
   };
 
+  const RenderTodos = () => {
+    return todos.map((todo) => {
+      return (
+        <ToDoItem
+          key={todo._id}
+          todo={todo}
+          deleteConfirm={deleteConfirm}
+          deleteCancel={deleteCancel}
+          showEditModal={showEditModal}
+        />
+      );
+    });
+  };
+
   return (
     <>
       <Tabs defaultActiveKey="1" centered>
         <TabPane tab="Tab 1" key="1">
           <div className="site-card-wrapper">
             <Row justify="center" gutter={[16, 16]} className="card-wrap-row">
-              <ToDoItem
-                deleteConfirm={deleteConfirm}
-                deleteCancel={deleteCancel}
-                showEditModal={showEditModal}
-              />
+              {RenderTodos()}
             </Row>
           </div>
         </TabPane>
