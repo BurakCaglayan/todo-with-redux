@@ -38,7 +38,6 @@ export const remove = (id) => (dispatch) => {
 };
 
 export const update = (id, data) => (dispatch) => {
-  console.log("id: ", id);
   dispatch({
     type: "todo/pending",
   });
@@ -50,4 +49,13 @@ export const update = (id, data) => (dispatch) => {
     method: "PUT",
     body: JSON.stringify(data),
   }).then(() => dispatch(list()));
+};
+
+export const changeFilter = (status) => (dispatch) => {
+  dispatch({
+    type: "todo/filter",
+    payload: status,
+  });
+
+  dispatch(list());
 };
