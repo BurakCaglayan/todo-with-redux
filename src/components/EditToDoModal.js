@@ -3,13 +3,20 @@ import React from "react";
 import { Modal, Form, Input, Button, Switch, Row, Col } from "antd";
 import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 
+import { useDispatch } from "react-redux";
+import { update } from "../redux/actions/todo";
+
 const isCompleted = (status) => (status === "COMPLETED" ? true : false);
 
 const EditToDoModal = ({ selectedTodo, isModalVisible, handleEditOk, handleEditCancel }) => {
+  const dispatch = useDispatch();
+
   const { TextArea } = Input;
 
   const onEditFinish = (values) => {
-    console.log("Success:", values);
+    values.status = values.status === true ? "COMPLETED" : "INCOMPLETED";
+    dispatch(update(selectedTodo._id, values));
+    handleEditCancel();
   };
 
   const onEditFinishFailed = (errorInfo) => {
