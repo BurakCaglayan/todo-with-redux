@@ -1,9 +1,21 @@
+import React, { useState, useEffect } from "react";
+
 import { Col, Card, Switch, Popconfirm } from "antd";
 import { EditOutlined, DeleteOutlined, CloseOutlined, CheckOutlined } from "@ant-design/icons";
 
 const isCompleted = (status) => (status === "COMPLETED" ? true : false);
 
 const ToDoItem = ({ todo, deleteConfirm, deleteCancel, showEditModal }) => {
+  const [isChecked, setIsChecked] = useState(false);
+
+  useEffect(() => {
+    setIsChecked(isCompleted(todo.status));
+  }, [todo]);
+
+  const onChangeStatus = (checked) => {
+    setIsChecked(checked);
+  }
+
   return (
     <>
       <Col xs={24} md={12} lg={8}>
@@ -15,7 +27,8 @@ const ToDoItem = ({ todo, deleteConfirm, deleteCancel, showEditModal }) => {
             <Switch
               checkedChildren={<CheckOutlined />}
               unCheckedChildren={<CloseOutlined />}
-              defaultChecked={isCompleted(todo.status)}
+              checked={isChecked}
+              onChange={onChangeStatus}
             />,
             <Popconfirm
               title="Are you sure to delete this ToDo?"
