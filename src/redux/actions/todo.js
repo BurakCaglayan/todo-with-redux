@@ -36,3 +36,18 @@ export const remove = (id) => (dispatch) => {
     method: "DELETE",
   }).then(() => dispatch(list()));
 };
+
+export const update = (id, data) => (dispatch) => {
+  console.log("id: ", id);
+  dispatch({
+    type: "todo/pending",
+  });
+
+  fetch(`http://localhost:5000/api/todos/${id}`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "PUT",
+    body: JSON.stringify(data),
+  }).then(() => dispatch(list()));
+};
