@@ -58,18 +58,18 @@ const TabMenu = () => {
   return (
     <>
       <Tabs defaultActiveKey="1" centered>
-        <TabPane tab="Tab 1" key="1">
+        <TabPane tab="All" key="1">
           <div className="site-card-wrapper">
             <Row justify="center" gutter={[16, 16]} className="card-wrap-row">
               {RenderTodos()}
             </Row>
           </div>
         </TabPane>
-        <TabPane tab="Tab 2" key="2">
-          Content of Tab Pane 2
+        <TabPane tab="Completed" key="2">
+          Completed Items
         </TabPane>
-        <TabPane tab="Tab 3" key="3">
-          Content of Tab Pane 3
+        <TabPane tab="Incompleted" key="3">
+          Incompleted Items
         </TabPane>
       </Tabs>
       <EditToDoModal
