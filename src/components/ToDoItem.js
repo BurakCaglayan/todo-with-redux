@@ -1,23 +1,25 @@
 import { Col, Card, Switch, Popconfirm } from "antd";
 import { EditOutlined, DeleteOutlined, CloseOutlined, CheckOutlined } from "@ant-design/icons";
 
-const ToDoItem = ({ deleteConfirm, deleteCancel, showEditModal }) => {
+const isCompleted = (status) => (status === "COMPLETED" ? true : false);
+
+const ToDoItem = ({ todo, deleteConfirm, deleteCancel, showEditModal }) => {
   return (
     <>
       <Col xs={24} md={12} lg={8}>
         <Card
           hoverable
-          title="Card Title"
+          title={todo.title}
           actions={[
             <EditOutlined key="edit" onClick={showEditModal} />,
             <Switch
               checkedChildren={<CheckOutlined />}
               unCheckedChildren={<CloseOutlined />}
-              defaultChecked
+              checked={isCompleted(todo.status)}
             />,
             <Popconfirm
               title="Are you sure to delete this ToDo?"
-              onConfirm={deleteConfirm}
+              onConfirm={() => deleteConfirm(todo._id)}
               onCancel={deleteCancel}
               okText="Confirm"
               cancelText="Cancel"
@@ -26,7 +28,7 @@ const ToDoItem = ({ deleteConfirm, deleteCancel, showEditModal }) => {
             </Popconfirm>,
           ]}
         >
-          Card Content
+          {todo.description}
         </Card>
       </Col>
     </>
