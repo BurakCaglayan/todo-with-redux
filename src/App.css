@@ -4,7 +4,7 @@
 
 .todo-title {
   text-align: center;
-  margin-top: 0.5em;
+  padding: 1.5em 0 1em 0;
 }
 
 .site-card-wrapper {
@@ -14,7 +14,7 @@
 
 .card-wrap-row {
   width: 80%;
-  padding-bottom: 15px;
+  padding-bottom: 1em;
 }
 
 .txt-center {
