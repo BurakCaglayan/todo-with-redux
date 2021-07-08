@@ -3,9 +3,15 @@ import React, { useState, useEffect } from "react";
 import { Col, Card, Switch, Popconfirm } from "antd";
 import { EditOutlined, DeleteOutlined, CloseOutlined, CheckOutlined } from "@ant-design/icons";
 
+import { useDispatch } from "react-redux";
+import { update } from "../redux/actions/todo";
+
 const isCompleted = (status) => (status === "COMPLETED" ? true : false);
+const statusCheck = (status) => (status === true ? "COMPLETED" : "INCOMPLETED");
 
 const ToDoItem = ({ todo, deleteConfirm, deleteCancel, showEditModal }) => {
+  const dispatch = useDispatch();
+
   const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
@@ -14,7 +20,8 @@ const ToDoItem = ({ todo, deleteConfirm, deleteCancel, showEditModal }) => {
 
   const onChangeStatus = (checked) => {
     setIsChecked(checked);
-  }
+    dispatch(update(todo._id, { status: statusCheck(checked) }));
+  };
 
   return (
     <>
