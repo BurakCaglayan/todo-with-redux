@@ -18,17 +18,12 @@ const AddToDoItem = () => {
     addForm.resetFields();
   };
 
-  const onAddFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
-
   return (
     <Form
       name="editForm"
       form={addForm}
       initialValues={{ title: "", description: "", status: false }}
       onFinish={onAddFinish}
-      onFinishFailed={onAddFinishFailed}
     >
       <div className="site-card-wrapper">
         <Row justify="center" align="middle" layout="inline" gutter={16} className="card-wrap-row">
