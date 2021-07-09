@@ -29,3 +29,9 @@
 .ant-switch.ant-switch-checked {
   background-color: #6ce2a5;
 }
+
+.total-counter {
+  text-align: center;
+  margin-bottom: 16px;
+  color: rgba(0, 0, 0, 0.65);
+}

@@ -79,6 +79,7 @@ const TabMenu = () => {
       return (
         <TabPane tab={status.label} key={status.status}>
           <Spin spinning={pending}>
+            <h2 className="total-counter">Total: {todos.length}</h2>
             <div className="site-card-wrapper">
               <Row justify="center" gutter={[16, 16]} className="card-wrap-row">
                 {renderTodos(status)}
