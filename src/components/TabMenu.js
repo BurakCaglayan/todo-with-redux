@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import { Tabs, Row, Spin, message } from "antd";
 
 import ToDoItem from "./ToDoItem";
 import EditToDoModal from "./EditToDoModal";
-import { useSelector, useDispatch } from "react-redux";
 import { changeFilter, list, remove } from "../redux/actions/todo";
 
 const { TabPane } = Tabs;
@@ -37,12 +37,6 @@ const TabMenu = () => {
 
   const deleteConfirm = (id) => {
     dispatch(remove(id));
-    message.success("Click on Yes");
-  };
-
-  const deleteCancel = (e) => {
-    console.log(e);
-    message.error("Click on No");
   };
 
   const showEditModal = (item) => {
@@ -58,9 +52,9 @@ const TabMenu = () => {
     setIsModalVisible(false);
   };
 
-  function tabChange(key) {
+  const tabChange = (key) => {
     dispatch(changeFilter(key));
-  }
+  };
 
   const renderTodos = (status) => {
     if (todos.length > 0) {
@@ -71,7 +65,6 @@ const TabMenu = () => {
             todo={todo}
             pending={pending}
             deleteConfirm={deleteConfirm}
-            deleteCancel={deleteCancel}
             showEditModal={showEditModal}
           />
         );
@@ -99,7 +92,7 @@ const TabMenu = () => {
 
   return (
     <>
-      <Tabs defaultActiveKey="1" centered onChange={tabChange}>
+      <Tabs defaultActiveKey={statuses[0].status} centered onChange={tabChange}>
         {renderTabs()}
       </Tabs>
       <EditToDoModal

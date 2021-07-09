@@ -1,12 +1,11 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 
 import { Modal, Form, Input, Button, Switch, Row, Col } from "antd";
 import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 
-import { useDispatch } from "react-redux";
+import { isCompleted } from "../utils/utils";
 import { update } from "../redux/actions/todo";
-
-const isCompleted = (status) => (status === "COMPLETED" ? true : false);
 
 const EditToDoModal = ({ selectedTodo, isModalVisible, handleEditOk, handleEditCancel }) => {
   const dispatch = useDispatch();
@@ -14,13 +13,9 @@ const EditToDoModal = ({ selectedTodo, isModalVisible, handleEditOk, handleEditC
   const { TextArea } = Input;
 
   const onEditFinish = (values) => {
-    values.status = values.status === true ? "COMPLETED" : "INCOMPLETED";
+    values.status = values.status ? "COMPLETED" : "INCOMPLETED";
     dispatch(update(selectedTodo._id, values));
     handleEditCancel();
-  };
-
-  const onEditFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
   };
 
   return (
@@ -43,7 +38,6 @@ const EditToDoModal = ({ selectedTodo, isModalVisible, handleEditOk, handleEditC
             status: isCompleted(selectedTodo.status),
           }}
           onFinish={onEditFinish}
-          onFinishFailed={onEditFinishFailed}
         >
           <Form.Item
             label="Title"

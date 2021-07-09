@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import { Col, Card, Switch, Popconfirm } from "antd";
 import { EditOutlined, DeleteOutlined, CloseOutlined, CheckOutlined } from "@ant-design/icons";
 
-import { useDispatch } from "react-redux";
+import { isCompleted, getStatus } from "../utils/utils";
 import { update } from "../redux/actions/todo";
 
-const isCompleted = (status) => (status === "COMPLETED" ? true : false);
-const statusCheck = (status) => (status === true ? "COMPLETED" : "INCOMPLETED");
-
-const ToDoItem = ({ todo, deleteConfirm, deleteCancel, showEditModal, pending }) => {
+const ToDoItem = ({ todo, deleteConfirm, showEditModal }) => {
   const dispatch = useDispatch();
 
   const [isChecked, setIsChecked] = useState(false);
@@ -20,7 +18,7 @@ const ToDoItem = ({ todo, deleteConfirm, deleteCancel, showEditModal, pending })
 
   const onChangeStatus = (checked) => {
     setIsChecked(checked);
-    dispatch(update(todo._id, { status: statusCheck(checked) }));
+    dispatch(update(todo._id, { status: getStatus(checked) }));
   };
 
   return (
@@ -42,7 +40,6 @@ const ToDoItem = ({ todo, deleteConfirm, deleteCancel, showEditModal, pending })
             <Popconfirm
               title="Are you sure to delete this ToDo?"
               onConfirm={() => deleteConfirm(todo._id)}
-              onCancel={deleteCancel}
               okText="Confirm"
               cancelText="Cancel"
             >

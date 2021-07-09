@@ -1,8 +1,10 @@
 const BASE_URL = process.env.NODE_ENV === "production" ? process.env.REACT_APP_BASE_URL : "http://localhost:5000/api";
 
+const typePending = "todo/pending"
+
 export const list = () => (dispatch) => {
   dispatch({
-    type: "todo/pending",
+    type: typePending,
   });
 
   fetch(`${BASE_URL}/todos/list`)
@@ -17,7 +19,7 @@ export const list = () => (dispatch) => {
 
 export const create = (data) => (dispatch) => {
   dispatch({
-    type: "todo/pending",
+    type: typePending,
   });
 
   fetch(`${BASE_URL}/todos`, {
@@ -31,7 +33,7 @@ export const create = (data) => (dispatch) => {
 
 export const remove = (id) => (dispatch) => {
   dispatch({
-    type: "todo/pending",
+    type: typePending,
   });
 
   fetch(`${BASE_URL}/todos/${id}`, {
@@ -41,7 +43,7 @@ export const remove = (id) => (dispatch) => {
 
 export const update = (id, data) => (dispatch) => {
   dispatch({
-    type: "todo/pending",
+    type: typePending,
   });
 
   fetch(`${BASE_URL}/todos/${id}`, {

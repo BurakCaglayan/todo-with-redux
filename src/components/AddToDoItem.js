@@ -1,9 +1,9 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 
 import { Form, Input, Button, Switch, Row, Col } from "antd";
 import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 
-import { useDispatch } from "react-redux";
 import { create } from "../redux/actions/todo";
 
 const AddToDoItem = () => {
@@ -13,7 +13,7 @@ const AddToDoItem = () => {
   const { TextArea } = Input;
 
   const onAddFinish = (values) => {
-    values.status = values.status === true ? "COMPLETED" : "INCOMPLETED";
+    values.status = values.status ? "COMPLETED" : "INCOMPLETED";
     dispatch(create(values));
     addForm.resetFields();
   };
@@ -37,7 +37,7 @@ const AddToDoItem = () => {
               <Input placeholder="Title" />
             </Form.Item>
           </Col>
-          <Col xs={24} md={12} lg={112}>
+          <Col xs={24} md={12} lg={12}>
             <Form.Item name="description" rules={[{ required: false }]}>
               <TextArea placeholder="Description" autoSize={{ minRows: 1, maxRows: 3 }} />
             </Form.Item>
